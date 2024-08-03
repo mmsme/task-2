@@ -1,0 +1,43 @@
+/* NOTE: base contains core of style like vars and mixins and functions */
+/* ---------------------------------- base ---------------------------------- */
+@import "./base/functions";
+@import "./base/mixins";
+@import "./base/helpers";
+@import "./base/typography";
+@import "./base/vars";
+
+// import bootstrap vars and functions to make custom bootstrap theme
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+// first add main themes colors vars keys in bootstrap and setup default theme
+@import "./themes/default";
+
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/utilities";
+
+// utility to customize bootstrap and generate new style based on bootstrap api
+@import "utilities/background";
+@import "utilities/border";
+@import "utilities/color";
+@import "utilities/forms";
+@import "utilities/text";
+@import "utilities/spacing";
+@import "utilities/sizes";
+@import "utilities/cursor";
+
+@import "bootstrap/scss/utilities/api";
+
+// vendor
+@import "../libs/fontawesome/css/all";
+@import "bootstrap/scss/bootstrap";
+
+// layouts
+
+// components

@@ -1,0 +1,33 @@
+$utilities: map-merge(
+  $utilities,
+  (
+    "width":
+      map-merge(
+        map-get($utilities, "width"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "width"), "values"),
+              (
+                fit: fit-content,
+              )
+            ),
+          responsive: true,
+        )
+      ),
+    "height":
+      map-merge(
+        map-get($utilities, "height"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "height"), "values"),
+              (
+                fit: fit-content,
+              )
+            ),
+          responsive: true,
+        )
+      ),
+  )
+);

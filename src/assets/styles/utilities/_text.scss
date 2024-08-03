@@ -1,0 +1,57 @@
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-size":
+      map-merge(
+        map-get($utilities, "font-size"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "font-size"), "values"),
+              $theme-fonts-sizes
+            ),
+          responsive: true,
+        )
+      ),
+    "text-align":
+      map-merge(
+        map-get($utilities, "text-align"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "text-align"), "values"),
+              (
+                start: start,
+                end: end,
+                center: center,
+              )
+            ),
+          responsive: true,
+        )
+      ),
+    "font-weight":
+      map-merge(
+        map-get($utilities, "font-weight"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "font-weight"), "values"),
+              $font-weights
+            ),
+        )
+      ),
+    "font-family":
+      map-merge(
+        map-get($utilities, "font-family"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "font-family"), "values"),
+              (
+                urw: "urw",
+              )
+            ),
+        )
+      ),
+  )
+);

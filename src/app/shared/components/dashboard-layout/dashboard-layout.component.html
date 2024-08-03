@@ -1,0 +1,219 @@
+<div class="vh-100">
+  <mat-drawer-container class="example-container h-100">
+    <mat-drawer
+      #drawer
+      class="example-sidenav bg-primary bg-gradient text-white p-3 rounded-0 border-end-1"
+      [mode]="sideBarMode"
+      [opened]="sideBarToggle"
+    >
+      <a routerLink="/">
+        <img
+          src="assets/images/logos/maidcss_white.png"
+          height="60"
+          alt="maid.ss"
+          srcset=""
+        />
+      </a>
+
+      <br />
+
+      <ul class="nav flex-column mt-4">
+        @if (list) { @for (item of list; track $index) { @if (!item.children) {
+        <li class="nav-item">
+          <a
+            class="nav-link d-flex gap-2 align-items-center"
+            [routerLink]="item.link"
+            routerLinkActive="active"
+          >
+            @if (item.image) {
+            <img
+              [src]="item.image"
+              loading="lazy"
+              class="object-fit-contain"
+              width="30"
+              height="30"
+            />
+            } @if (item.icon) {
+            <i class="icons {{ item.icon }}"></i>
+            }
+
+            <span class="text-capitalize">{{ item.name }}</span>
+          </a>
+        </li>
+        }@else {
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link"
+            role="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapseExample' + item.name"
+            aria-expanded="false"
+            [attr.aria-controls]="'collapseExample' + item.name"
+          >
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-2">
+                @if (item.image) {
+                <img
+                  [src]="item.image"
+                  loading="lazy"
+                  class="object-fit-contain"
+                  width="30"
+                  height="30"
+                />
+                } @if (item.icon) {
+                <i class="icons {{ item.icon }}"></i>
+                }
+                <span> {{ item.name }}</span>
+              </div>
+              <i class="fa-solid fa-angle-down"></i>
+            </div>
+          </a>
+          <div class="collapse" [id]="'collapseExample' + item.name">
+            <div class="card card-body bg-white border-0 mt-2">
+              <ul class="list-unstyled">
+                @for (sub of item.children; track $index) {
+                <li class="nav-item">
+                  <a
+                    class="nav-link text-dark"
+                    [routerLink]="sub.link"
+                    routerLinkActive="active"
+                  >
+                    <span class="text-capitalize">{{ sub.name }}</span>
+                  </a>
+                </li>
+                }
+              </ul>
+            </div>
+          </div>
+        </li>
+        } } }
+      </ul>
+    </mat-drawer>
+
+    <section class="example-sidenav-content d-flex flex-column h-100">
+      <mat-toolbar class="bg-white border-bottom shadow-sm">
+        <button
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with menu icon"
+          (click)="drawer.toggle()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="ms-3">My App</span>
+        <span class="example-spacer"></span>
+        <div class="d-flex justify-content-end align-items-center gap-2">
+          <button
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with share icon"
+          >
+            <mat-icon>share</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="example-icon favorite-icon"
+            aria-label="Example icon-button with heart icon"
+          >
+            <mat-icon matBadge="5" matBadgeSize="large">notifications</mat-icon>
+          </button>
+
+          <div
+            class="avatar"
+            (click)="isOpen = !isOpen"
+            type="button"
+            cdkOverlayOrigin
+            #trigger="cdkOverlayOrigin"
+          >
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+              alt=""
+              srcset=""
+            />
+          </div>
+        </div>
+      </mat-toolbar>
+
+      <div class="p-3 flex-fill">
+        <router-outlet></router-outlet>
+      </div>
+    </section>
+  </mat-drawer-container>
+</div>
+
+<!-- This template displays the overlay content and is connected to the button -->
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (backdropClick)="isOpen = false"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+>
+  <div class="card profile-menu border-0">
+    <div class="card-header border-0 bg-primary bg-gradient text-white">
+      <div class="d-flex py-1 align-items-center">
+        <div class="flex-shrink-0 align-items-center">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+            class="rounded-circle"
+            width="60"
+            height="60"
+          />
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <h6 class="m-0 mb-1">Mohamed Mustafa</h6>
+          <p class="m-0 opacity-75 fs-sm">Front End Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h6 class="text-secondary fs-sm text-capitalize opacity-50">account</h6>
+      <ul class="list-group mb-2">
+        <li class="list-group-item">
+          <a routerLink="/test" class="d-flex gap-3 align-items-center fs-sm">
+            <i class="fa-regular fa-user"></i> <span>Profile</span>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a routerLink="/test" class="d-flex gap-3 align-items-center fs-sm">
+            <i class="fa-regular fa-wallet"></i>
+            Earnings
+          </a>
+        </li>
+      </ul>
+      <h6 class="text-secondary fs-sm text-capitalize opacity-50">settings</h6>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a routerLink="/test" class="d-flex gap-3 align-items-center fs-sm">
+            <i class="fa-regular fa-gear"></i> <span> Account Settings</span>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a routerLink="/test" class="d-flex gap-3 align-items-center fs-sm">
+            <i class="fa-regular fa-lock"></i>
+            Security
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a routerLink="/test" class="d-flex gap-3 align-items-center fs-sm">
+            <i class="fa-regular fa-circle-question"></i> Help Center
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-footer bg-transparent">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a
+            routerLink="/test"
+            class="d-flex gap-3 align-items-center fs-sm text-danger"
+          >
+            <i class="fa-regular fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,77 @@
+<div class="d-flex flex-column gap-4 h-100">
+  <div class="d-flex justify-content-between gap-3 flex-wrap">
+    <h3 class="m-0">Users</h3>
+    <div class="col-lg-4 col-md-6 col-sm-7 col-12">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search By "
+          aria-label="Username"
+          aria-describedby="input1"
+          [(ngModel)]="searchText"
+        />
+        <span class="input-group-text" id="input1"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></span>
+      </div>
+    </div>
+  </div>
+  @if (users) {
+  <div class="flex-fill">
+    <div
+      class="row row-cols-xl-3 row-cols-lg-2 row-cols-md-1 g-3 mb-4 flex-fill"
+    >
+      @for (item of users.data | appFilter: searchText; track $index) {
+      <div>
+        <div
+          class="card border-0 shadow-sm rounded-12 cursor-pointer overflow-hidden"
+          [routerLink]="[detailsLink, item.id]"
+        >
+          <div class="card-body">
+            <div class="d-flex">
+              <div class="flex-shrink-0">
+                <img
+                  [src]="item.avatar"
+                  width="70"
+                  height="70"
+                  class="object-fit-cover rounded-circle"
+                />
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="mt-0">{{ item.first_name }} {{ item.last_name }}</h5>
+                <div class="d-flex gap-3 align-items-center">
+                  <i class="fa-solid fa-id-card-clip"></i>
+                  <span>{{ item.id }}</span>
+                </div>
+                <div class="d-flex gap-3 align-items-center">
+                  <i class="fa-solid fa-envelope"></i>
+                  <span>{{ item.email }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    @if (!(users.data | appFilter: searchText).length) {
+    <img
+      src="assets/images/svgs/no_data.svg"
+      class="col-lg-4 col-md-6 col-12 d-block mx-auto"
+    />
+    }
+  </div>
+
+  <mat-paginator
+    class="bg-transparent"
+    [length]="users.total"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+
+  }
+</div>

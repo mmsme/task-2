@@ -1,0 +1,61 @@
+$utilities: map-merge(
+  $utilities,
+  (
+    "margin-end":
+      map-merge(
+        map-get($utilities, "margin-end"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "margin-end"), "values"),
+              (
+                auto: auto,
+              )
+            ),
+          property: margin-inline-end,
+        )
+      ),
+    "margin-start":
+      map-merge(
+        map-get($utilities, "margin-start"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "margin-start"), "values"),
+              (
+                auto: auto,
+              )
+            ),
+          property: margin-inline-start,
+        )
+      ),
+    "negative-margin-end":
+      map-merge(
+        map-get($utilities, "negative-margin-end"),
+        (
+          property: margin-inline-end,
+        )
+      ),
+    "negative-margin-start":
+      map-merge(
+        map-get($utilities, "negative-margin-start"),
+        (
+          property: margin-inline-start,
+        )
+      ),
+    "padding-start":
+      map-merge(
+        map-get($utilities, "padding-start"),
+        (
+          property: padding-inline-start,
+        )
+      ),
+    "padding-end":
+      map-merge(
+        map-get($utilities, "padding-end"),
+        (
+          property: padding-inline-end,
+        )
+      ),
+  )
+);
